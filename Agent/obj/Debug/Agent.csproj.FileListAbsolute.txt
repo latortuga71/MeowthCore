@@ -1,0 +1,7 @@
+C:\Users\latortuga\source\repos\MeowthCore\Agent\bin\Debug\Agent.exe.config
+C:\Users\latortuga\source\repos\MeowthCore\Agent\bin\Debug\Agent.exe
+C:\Users\latortuga\source\repos\MeowthCore\Agent\bin\Debug\Agent.pdb
+C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Agent.csproj.CoreCompileInputs.cache
+C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Agent.exe
+C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Agent.pdb
+C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Agent.csproj.AssemblyReference.cache
