@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ChangeDirectory.cs" />
+    <Compile Include="Commands\InteractiveShell.cs" />
     <Compile Include="Commands\RevertToSelf.cs" />
     <Compile Include="Commands\CreateDirectory.cs" />
     <Compile Include="Commands\DeleteDirectory.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Models\HttpCommModule.cs" />
     <Compile Include="Native\Advapi.cs" />
     <Compile Include="Native\Kernel32.cs" />
+    <Compile Include="Native\Ws2_32.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
