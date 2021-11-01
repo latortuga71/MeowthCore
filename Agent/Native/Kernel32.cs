@@ -5,11 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
+
+using HANDLE = System.IntPtr;
+using HPSS = System.IntPtr;
+using PVOID = System.IntPtr;
 using PMINIDUMP_CALLBACK_INPUT = System.IntPtr;
 using PMINIDUMP_CALLBACK_OUTPUT = System.IntPtr;
 using PMINIDUMP_EXCEPTION_INFORMATION = System.IntPtr;
 using PMINIDUMP_USER_STREAM_INFORMATION = System.IntPtr;
 using PMINIDUMP_CALLBACK_INFORMATION = System.IntPtr;
+using BOOL = System.Int32;
+using DWORD = System.Int32;
+
 
 namespace Agent.Native
 {
@@ -173,6 +180,34 @@ namespace Agent.Native
             UInt32 ProcInfoLen,
             ref UInt32 retlen
         );
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern IntPtr LoadLibrary(string lpFileName);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern IntPtr GetProcAddress(
+            IntPtr hModule,
+            string procName
+        );
+
+        // GetCurrentProcess
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr GetCurrentProcess();
+        [DllImport("dbghelp")]
+        public static extern DWORD MiniDumpWriteDump(HANDLE hProcess, DWORD ProcessId, HANDLE hFile, MINIDUMP_TYPE DumpType, PMINIDUMP_EXCEPTION_INFORMATION ExceptionParam, PMINIDUMP_USER_STREAM_INFORMATION UserStreamParam, PMINIDUMP_CALLBACK_INFORMATION CallbackParam);
+        public static bool ATPDumpCallbackMethod(PVOID param, PMINIDUMP_CALLBACK_INPUT input, PMINIDUMP_CALLBACK_OUTPUT output)
+        {
+            unsafe
+            {
+                if (Marshal.ReadByte(input + sizeof(int) + IntPtr.Size) == 16)
+                {
+                    var outp = (MINIDUMP_CALLBACK_OUTPUT*)output;
+                    outp->Status = 1;
+                }
+            }
+            return true;
+        }
+
         public struct PROCESS_BASIC_INFORMATION
         {
             public IntPtr Reserved1;
@@ -276,6 +311,17 @@ namespace Agent.Native
             MiniDumpFilterTriage = 0x00100000,
             MiniDumpValidTypeFlags = 0x001fffff
         }
+        public struct MINIDUMP_CALLBACK_INFORMATION
+        {
+            public IntPtr CallbackRoutine;
+            public PVOID CallbackParam;
+        }
+
+        public struct MINIDUMP_CALLBACK_OUTPUT
+        {
+            public int Status; // HRESULT
+        }
+
         public enum AllocationProtect : uint
         {
             PAGE_EXECUTE = 0x00000010,
@@ -333,6 +379,20 @@ namespace Agent.Native
             public IntPtr hThread;
             public int dwProcessId;
             public int dwThreadId;
+        }
+        [Flags]
+        public enum CONTEXT_FLAGS : int
+        {
+            CONTEXT_i386 = 0x10000,
+            CONTEXT_i486 = 0x10000,   //  same as i386
+            CONTEXT_CONTROL = CONTEXT_i386 | 0x01, // SS:SP, CS:IP, FLAGS, BP
+            CONTEXT_INTEGER = CONTEXT_i386 | 0x02, // AX, BX, CX, DX, SI, DI
+            CONTEXT_SEGMENTS = CONTEXT_i386 | 0x04, // DS, ES, FS, GS
+            CONTEXT_FLOATING_POINT = CONTEXT_i386 | 0x08, // 387 state
+            CONTEXT_DEBUG_REGISTERS = CONTEXT_i386 | 0x10, // DB 0-3,6,7
+            CONTEXT_EXTENDED_REGISTERS = CONTEXT_i386 | 0x20, // cpu specific extensions
+            CONTEXT_FULL = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS,
+            CONTEXT_ALL = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS | CONTEXT_EXTENDED_REGISTERS
         }
     }
 }

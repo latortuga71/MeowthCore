@@ -1,0 +1,12 @@
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\bin\Release\net5.0\ApiModels.deps.json
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\bin\Release\net5.0\ApiModels.dll
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\bin\Release\net5.0\ref\ApiModels.dll
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\bin\Release\net5.0\ApiModels.pdb
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\obj\Release\net5.0\ApiModels.csproj.AssemblyReference.cache
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\obj\Release\net5.0\ApiModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\obj\Release\net5.0\ApiModels.AssemblyInfoInputs.cache
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\obj\Release\net5.0\ApiModels.AssemblyInfo.cs
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\obj\Release\net5.0\ApiModels.csproj.CoreCompileInputs.cache
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\obj\Release\net5.0\ApiModels.dll
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\obj\Release\net5.0\ref\ApiModels.dll
+C:\Users\latortuga\source\repos\MeowthCore\ApiModels\obj\Release\net5.0\ApiModels.pdb

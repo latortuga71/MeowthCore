@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,7 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ChangeDirectory.cs" />
-    <Compile Include="Commands\InteractiveShell.cs" />
+    <Compile Include="Commands\DisableAMSI.cs" />
+    <Compile Include="Commands\DisableEtw.cs" />
+    <Compile Include="Commands\DisableSysmon.cs" />
+    <Compile Include="Commands\EnablePrivilege.cs" />
+    <Compile Include="Commands\GetSystem.cs" />
+    <Compile Include="Commands\LsaDump.cs" />
+    <Compile Include="Commands\PingSweep.cs" />
     <Compile Include="Commands\RevertToSelf.cs" />
     <Compile Include="Commands\CreateDirectory.cs" />
     <Compile Include="Commands\DeleteDirectory.cs" />
@@ -57,6 +65,7 @@
     <Compile Include="Commands\RunAs.cs" />
     <Compile Include="Commands\Shell.cs" />
     <Compile Include="Commands\ShellcodeInject.cs" />
+    <Compile Include="Commands\TurtleDump.cs" />
     <Compile Include="Commands\SpawnInject.cs" />
     <Compile Include="Commands\StealToken.cs" />
     <Compile Include="Commands\TestCommand.cs" />
@@ -64,6 +73,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Generic.cs" />
     <Compile Include="Internal\Execute.cs" />
+    <Compile Include="Internal\Impersonator.cs" />
     <Compile Include="Internal\Injector.cs" />
     <Compile Include="Internal\RemoteInjector.cs" />
     <Compile Include="Internal\SelfInjector.cs" />

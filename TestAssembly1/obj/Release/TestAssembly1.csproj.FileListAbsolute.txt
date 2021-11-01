@@ -1,0 +1,7 @@
+C:\Users\latortuga\source\repos\MeowthCore\TestAssembly1\bin\Release\TestAssembly1.exe.config
+C:\Users\latortuga\source\repos\MeowthCore\TestAssembly1\bin\Release\TestAssembly1.exe
+C:\Users\latortuga\source\repos\MeowthCore\TestAssembly1\bin\Release\TestAssembly1.pdb
+C:\Users\latortuga\source\repos\MeowthCore\TestAssembly1\obj\Release\TestAssembly1.csproj.AssemblyReference.cache
+C:\Users\latortuga\source\repos\MeowthCore\TestAssembly1\obj\Release\TestAssembly1.csproj.CoreCompileInputs.cache
+C:\Users\latortuga\source\repos\MeowthCore\TestAssembly1\obj\Release\TestAssembly1.exe
+C:\Users\latortuga\source\repos\MeowthCore\TestAssembly1\obj\Release\TestAssembly1.pdb
