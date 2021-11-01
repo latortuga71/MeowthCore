@@ -147,6 +147,54 @@ namespace Agent.Native
         [DllImport("kernel32")]
         public static extern bool GetProcessId(
             IntPtr hObject);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool CreateProcess(
+            string lpApplicationName,
+            string lpCommandLine,
+            IntPtr lpProcessAttributes,
+            IntPtr lpThreadAttributes,
+            bool bInheritHandles,
+            uint dwCreationFlags,
+            IntPtr lpEnvironment,
+            string lpCurrentDirectory,
+            [In] ref STARTUPINFO lpStartupInfo,
+            out PROCESS_INFORMATION lpProcessInformation
+        );
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr QueueUserAPC(IntPtr pfnAPC, IntPtr hThread, IntPtr dwData);
+
+        //zw query information
+        [DllImport("ntdll.dll", SetLastError = true)]
+        public static extern UInt32 ZwQueryInformationProcess(
+            IntPtr hProcess,
+            int procInformationClass,
+            ref PROCESS_BASIC_INFORMATION procInformation,
+            UInt32 ProcInfoLen,
+            ref UInt32 retlen
+        );
+        public struct PROCESS_BASIC_INFORMATION
+        {
+            public IntPtr Reserved1;
+            public IntPtr PebAddress;
+            public IntPtr Reserved2;
+            public IntPtr Reserved3;
+            public IntPtr UniqueProcessId;
+            public IntPtr MoreReserved;
+        }
+        public enum CreationFlags
+
+        {
+
+            DefaultErrorMode = 0x04000000,
+            NewConsole = 0x00000010,
+            NewProcessGroup = 0x00000200,
+            SeparateWOWVDM = 0x00000800,
+            Suspended = 0x00000004,
+            UnicodeEnvironment = 0x00000400,
+            ExtendedStartupInfoPresent = 0x00080000
+
+        }
         [Flags]
         public enum ProcessAccessFlags : uint
         {
@@ -255,6 +303,36 @@ namespace Agent.Native
             MEM_IMAGE = 0x1000000,
             MEM_MAPPED = 0x40000,
             MEM_PRIVATE = 0x20000
+        }
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+        public struct STARTUPINFO
+        {
+            public Int32 cb;
+            public string lpReserved;
+            public string lpDesktop;
+            public string lpTitle;
+            public Int32 dwX;
+            public Int32 dwY;
+            public Int32 dwXSize;
+            public Int32 dwYSize;
+            public Int32 dwXCountChars;
+            public Int32 dwYCountChars;
+            public Int32 dwFillAttribute;
+            public Int32 dwFlags;
+            public Int16 wShowWindow;
+            public Int16 cbReserved2;
+            public IntPtr lpReserved2;
+            public IntPtr hStdInput;
+            public IntPtr hStdOutput;
+            public IntPtr hStdError;
+        }
+        [StructLayout(LayoutKind.Sequential)]
+        public struct PROCESS_INFORMATION
+        {
+            public IntPtr hProcess;
+            public IntPtr hThread;
+            public int dwProcessId;
+            public int dwThreadId;
         }
     }
 }
