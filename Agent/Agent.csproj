@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Agent</RootNamespace>
     <AssemblyName>Agent</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -38,6 +39,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AdminCheck.cs" />
     <Compile Include="Commands\ChangeDirectory.cs" />
     <Compile Include="Commands\DisableAMSI.cs" />
     <Compile Include="Commands\DisableEtw.cs" />
@@ -77,6 +80,7 @@
     <Compile Include="Internal\Injector.cs" />
     <Compile Include="Internal\RemoteInjector.cs" />
     <Compile Include="Internal\SelfInjector.cs" />
+    <Compile Include="Internal\Services.cs" />
     <Compile Include="Internal\SpawnInjector.cs" />
     <Compile Include="Models\AgentCommand.cs" />
     <Compile Include="Models\AgentMetadata.cs" />
