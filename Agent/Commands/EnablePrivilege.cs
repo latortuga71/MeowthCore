@@ -12,6 +12,10 @@ namespace Agent.Commands
 
         public override string Execute(AgentTask task)
         {
+            if (task.Args is null || task.Args.Length == 0)
+            {
+                return "No Privilege Provided";
+            }
             var priv = task.Args[0];
             if (Internal.Impersonator.IsPrivilegeEnabled(priv))
                 return "Already Enabled";

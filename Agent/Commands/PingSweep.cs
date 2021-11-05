@@ -22,6 +22,10 @@ namespace Agent.Commands
 
         public override string Execute(AgentTask task)
         {
+            if (task.Args is null || task.Args.Length == 0)
+            {
+                return "No Subnet Provided";
+            }
             upHosts = new List<string>();
             var subnet = task.Args[0];
             ExecutePingSweep(subnet);

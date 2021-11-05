@@ -13,6 +13,10 @@ namespace Agent.Commands
 
         public override string Execute(AgentTask task)
         {
+            if (task.Args is null || task.Args.Length == 0)
+            {
+                return "No Username and password Provided";
+            }
             var userDomain = task.Args[0];
             var password = task.Args[1];
             var split = userDomain.Split('\\');

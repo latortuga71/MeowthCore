@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -33,6 +48,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -71,17 +88,21 @@
     <Compile Include="Commands\TurtleDump.cs" />
     <Compile Include="Commands\SpawnInject.cs" />
     <Compile Include="Commands\StealToken.cs" />
-    <Compile Include="Commands\TestCommand.cs" />
+    <Compile Include="Commands\PingCmd.cs" />
+    <Compile Include="Commands\UnHookDll.cs" />
+    <Compile Include="Commands\Upload.cs" />
     <Compile Include="Commands\WhoAmI.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Generic.cs" />
     <Compile Include="Internal\Execute.cs" />
     <Compile Include="Internal\Impersonator.cs" />
     <Compile Include="Internal\Injector.cs" />
+    <Compile Include="Internal\PeParser.cs" />
     <Compile Include="Internal\RemoteInjector.cs" />
     <Compile Include="Internal\SelfInjector.cs" />
     <Compile Include="Internal\Services.cs" />
     <Compile Include="Internal\SpawnInjector.cs" />
+    <Compile Include="Internal\Unhooker.cs" />
     <Compile Include="Models\AgentCommand.cs" />
     <Compile Include="Models\AgentMetadata.cs" />
     <Compile Include="Models\AgentTask.cs" />
@@ -96,6 +117,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

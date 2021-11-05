@@ -20,8 +20,8 @@ namespace MeowthCoreServer
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                    //.UseUrls(urls: "http://0.0.0.0:80");
+                    webBuilder.UseStartup<Startup>()
+                    .UseUrls(urls: "http://0.0.0.0:5000");
                 });
     }       
 }

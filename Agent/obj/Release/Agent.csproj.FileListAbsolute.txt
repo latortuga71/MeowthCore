@@ -1,7 +1,7 @@
 C:\Users\latortuga\source\repos\MeowthCore\Agent\bin\Release\Agent.exe.config
 C:\Users\latortuga\source\repos\MeowthCore\Agent\bin\Release\Agent.exe
 C:\Users\latortuga\source\repos\MeowthCore\Agent\bin\Release\Agent.pdb
-C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Agent.csproj.AssemblyReference.cache
 C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Agent.csproj.CoreCompileInputs.cache
 C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Agent.exe
 C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Agent.pdb
+C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Agent.csproj.AssemblyReference.cache

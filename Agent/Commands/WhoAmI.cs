@@ -14,19 +14,37 @@ namespace Agent.Commands
 
         public override string Execute(AgentTask task)
         {
-            string output = "";
+            var results = new SharpSploitResultList<WhoamiResult>();
+            string grps = "";
             WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent();
-            output += $"The current user is : {currentIdentity.Name}\n";
             TokenImpersonationLevel token = currentIdentity.ImpersonationLevel;
-            output += $"The impersonation level for the current user is : {token.ToString()} \n";
             var groups = currentIdentity.Groups.Translate(typeof(NTAccount));
-            output += "The group memberships: \n";
-            output += "####################\n";
             foreach (var grp in groups)
             {
-                output += $" ::: {grp.Value} :::";
+                grps += $"{grp.Value}\n\t\t\t\t\t\t";
             }
-            return output;
+            var result = new WhoamiResult
+            {
+                IdentityName = currentIdentity.Name,
+                ImpersonationLevel = token.ToString(),
+                Groups = grps
+            };
+            results.Add(result);
+            return results.ToString();
         }
+    }
+    public sealed class WhoamiResult : SharpSploitResult
+    {
+        public string IdentityName{ get; set; }
+        public string ImpersonationLevel { get; set; }
+        public string Groups { get; set; }
+
+        protected internal override IList<SharpSploitResultProperty> ResultProperties => new List<SharpSploitResultProperty>
+        {
+            new SharpSploitResultProperty{Name = nameof(IdentityName),Value = IdentityName},
+            new SharpSploitResultProperty{Name = nameof(ImpersonationLevel),Value = ImpersonationLevel},
+            new SharpSploitResultProperty{Name = nameof(Groups),Value = Groups},
+
+        };
     }
 }
