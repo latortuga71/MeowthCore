@@ -9,3 +9,7 @@
 *.targets
 *.so
 MeowthCoreServer
+*publish*
+bin/*
+/MeowthCoreServer/bin/*
+*.a
