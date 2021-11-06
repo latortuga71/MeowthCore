@@ -48,6 +48,35 @@ namespace Agent.Native
             SectionReserve = 0x4000000,
         }
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool InitializeProcThreadAttributeList(
+         IntPtr lpAttributeList,
+         int dwAttributeCount,
+         int dwFlags,
+         ref IntPtr lpSize);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool UpdateProcThreadAttribute(
+         IntPtr lpAttributeList,
+         uint dwFlags,
+         IntPtr Attribute,
+         IntPtr lpValue,
+         IntPtr cbSize,
+         IntPtr lpPreviousValue,
+         IntPtr lpReturnSize);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool DeleteProcThreadAttributeList(IntPtr lpAttributeList);
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+        public struct STARTUPINFOEX
+        {
+            public STARTUPINFO StartupInfo;
+            public IntPtr lpAttributeList;
+        }
+
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern IntPtr CreateFileMapping(
             IntPtr hFile,
@@ -448,5 +477,6 @@ namespace Agent.Native
             CONTEXT_FULL = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS,
             CONTEXT_ALL = CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS | CONTEXT_EXTENDED_REGISTERS
         }
+
     }
 }

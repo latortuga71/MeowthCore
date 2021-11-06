@@ -72,8 +72,10 @@
     <Compile Include="Commands\DisableSysmon.cs" />
     <Compile Include="Commands\EnablePrivilege.cs" />
     <Compile Include="Commands\GetSystem.cs" />
+    <Compile Include="Commands\GetTrustedInstaller.cs" />
     <Compile Include="Commands\LsaDump.cs" />
     <Compile Include="Commands\PingSweep.cs" />
+    <Compile Include="Commands\ProcessHollow.cs" />
     <Compile Include="Commands\RevertToSelf.cs" />
     <Compile Include="Commands\CreateDirectory.cs" />
     <Compile Include="Commands\DeleteDirectory.cs" />

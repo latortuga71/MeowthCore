@@ -242,7 +242,7 @@ namespace Agent.Internal
             Console.WriteLine("windefend not found or stoppped");
             return 1;
         }
-        public static int StartTrustedInstaller()
+        public static bool StartTrustedInstaller()
         {
             ServiceController[] scServices;
             scServices = ServiceController.GetServices();
@@ -250,38 +250,24 @@ namespace Agent.Internal
             {
                 if (service.ServiceName == "TrustedInstaller")
                 {
-                    //Check if trusted installer is disabled!
-                    // if disabled set start type to demand
-                    Console.WriteLine("Checking if trusted installer is enabled");
                     if (service.StartType == ServiceStartMode.Disabled)
                     {
-                        Console.WriteLine("Trusted installer is disabled Attempting to set it to demand start");
                         ChangeStartMode(service, ServiceStartMode.Manual);
-                        //if (!EditLocalServiceStartType("trustedinstaller", 3))
-                        //{
-                        //    Console.WriteLine("Failed to set it to demand start");
-                        //    return 1;
-                        //}
-                        Console.WriteLine("Successfully set trusted installer to demand start");
                     }
-                    Console.WriteLine("Attempting to start trusted installer");
                     if (service.Status != ServiceControllerStatus.Running)
                     {
                         service.Start();
                         service.WaitForStatus(ServiceControllerStatus.Running);
-                        Console.WriteLine("Trusted installer started");
-                        return 0;
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine("Trusted installer already running");
-                        return 0;
+                        return true;
                     }
 
                 }
             }
-            Console.WriteLine("trusted installer not found");
-            return 1;
+            return false;
         }
 
         public static int StopService(string serviceName)
@@ -294,16 +280,13 @@ namespace Agent.Internal
                 {
                     if (service.Status != ServiceControllerStatus.Running)
                     {
-                        Console.WriteLine("{0} already stopped...exiting", serviceName);
                         return 0;
                     }
                     service.Stop();
                     service.WaitForStatus(ServiceControllerStatus.Stopped);
-                    Console.WriteLine("{} stoppped", serviceName);
                     return 0;
                 }
             }
-            Console.WriteLine("{0} not found or stoppped", serviceName);
             return 1;
         }
 
@@ -319,7 +302,6 @@ namespace Agent.Internal
             var scManagerHandle = Native.Advapi.OpenSCManager(target, null, Native.Advapi.SC_MANAGER_ALL_ACCESS);
             if (scManagerHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Manager Error");
                 return false;
             }
 
@@ -327,7 +309,6 @@ namespace Agent.Internal
 
             if (serviceHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Error");
                 return false;
             }
             uint structSz;
@@ -337,7 +318,6 @@ namespace Agent.Internal
             var success = Native.Advapi.QueryServiceConfig(serviceHandle, ptr, structSz, out structSz);
             if (!success)
             {
-                Console.WriteLine("Failed second service query");
                 Marshal.FreeHGlobal(ptr);
                 return false;
             }
