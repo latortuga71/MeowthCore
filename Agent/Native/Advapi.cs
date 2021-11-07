@@ -435,6 +435,43 @@ namespace Agent.Native
             POLICY_LOOKUP_NAMES = 0x00000800L,
             POLICY_NOTIFICATION = 0x00001000L
         }
+        [StructLayout(LayoutKind.Sequential)]
+        public struct TOKEN_STATISTICS
+        {
+            public LUID TokenId;
+            public LUID AuthenticationId;
+            public uint ExpirationTime;
+            public uint TokenType;
+            public uint ImpersonationLevel;
+            public uint DynamicCharged;
+            public uint DynamicAvailable;
+            public uint GroupCount;
+            public uint PrivilegeCount;
+            public LUID ModifiedId;
+        }
+        [DllImport("Secur32.dll", SetLastError = false)]
+
+        public static extern uint LsaGetLogonSessionData(IntPtr luid, out IntPtr ppLogonSessionData);
+        [StructLayout(LayoutKind.Sequential)]
+
+        public struct SECURITY_LOGON_SESSION_DATA
+
+        {
+
+            public UInt32 Size;
+            public LUID LoginID;
+            public LSA_UNICODE_STRING Username;
+            public LSA_UNICODE_STRING LoginDomain;
+            public LSA_UNICODE_STRING AuthenticationPackage;
+            public UInt32 LogonType;
+            public UInt32 Session;
+            public IntPtr PSiD;
+            public UInt64 LoginTime;
+            public LSA_UNICODE_STRING LogonServer;
+            public LSA_UNICODE_STRING DnsDomainName;
+            public LSA_UNICODE_STRING Upn;
+
+        }
 
     }
 }
