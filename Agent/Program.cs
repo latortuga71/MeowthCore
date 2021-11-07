@@ -104,7 +104,7 @@ namespace Agent
             if (!int.TryParse(task.Args[0], out var jitterSecs)) return "Failed to parse jitter in seconds";
             _jitterSeconds = jitterSecs;
             Stop();
-            _ttsMins = 1; // <-- 
+            _ttsMins = 1; // <-- incase sleep was changed
             return $"Successfully Set Jitter To {jitterSecs} Seconds";
         }
         public static void Start()
