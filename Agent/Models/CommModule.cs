@@ -9,7 +9,7 @@ namespace Agent.Models
 {
     public abstract class CommModule
     {
-        public abstract Task Start();
+        public abstract Task Start(int jitterSeconds);
         public abstract void Stop();
         protected ConcurrentQueue<AgentTask> Inbound = new ConcurrentQueue<AgentTask>();
         protected ConcurrentQueue<AgentTaskResult> Outbound = new ConcurrentQueue<AgentTaskResult>();

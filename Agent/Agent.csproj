@@ -70,8 +70,9 @@
     <Compile Include="Commands\DisableAMSI.cs" />
     <Compile Include="Commands\DisableEtw.cs" />
     <Compile Include="Commands\DisableSysmon.cs" />
+    <Compile Include="Commands\Download.cs" />
     <Compile Include="Commands\EnablePrivilege.cs" />
-    <Compile Include="Commands\GetAvailableTokens.cs" />
+    <Compile Include="Commands\EnumerateTokens.cs" />
     <Compile Include="Commands\GetSystem.cs" />
     <Compile Include="Commands\GetTrustedInstaller.cs" />
     <Compile Include="Commands\LsaDump.cs" />

