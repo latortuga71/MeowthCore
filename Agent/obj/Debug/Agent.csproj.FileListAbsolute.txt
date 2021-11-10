@@ -5,3 +5,5 @@ C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Agent.csproj.CoreComp
 C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Agent.exe
 C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Agent.pdb
 C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Agent.csproj.AssemblyReference.cache
+C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Interop.NetFwTypeLib.dll
+C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Debug\Agent.csproj.ResolveComReference.cache

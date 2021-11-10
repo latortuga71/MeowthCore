@@ -78,7 +78,6 @@ namespace Agent.Internal
             var scManagerHandle = Native.Advapi.OpenSCManager(target, null, Native.Advapi.SC_MANAGER_ALL_ACCESS);
             if (scManagerHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Manager Error");
                 return false;
             }
 
@@ -86,7 +85,6 @@ namespace Agent.Internal
 
             if (serviceHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Error");
                 return false;
             }
             var res = Native.Advapi.StartService(serviceHandle, 0, null);
@@ -99,14 +97,12 @@ namespace Agent.Internal
             var scManagerHandle = Native.Advapi.OpenSCManager(target, null, Native.Advapi.SC_MANAGER_ALL_ACCESS);
             if (scManagerHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Manager Error");
                 return false;
             }
 
             var serviceHandle = Native.Advapi.OpenService(scManagerHandle, serviceName, Native.Advapi.SERVICE_ALL_ACCESS); // all accesss
             if (serviceHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Error");
                 return false;
             }
             Native.Advapi.SERVICE_STATUS status = new Native.Advapi.SERVICE_STATUS();
@@ -130,23 +126,19 @@ namespace Agent.Internal
             {
                 if (service.ServiceName == serviceName)
                 {
-                    Console.WriteLine("Attempting to start {0}", serviceName);
                     if (service.Status != ServiceControllerStatus.Running)
                     {
                         service.Start();
                         service.WaitForStatus(ServiceControllerStatus.Running);
-                        Console.WriteLine("{0} started", serviceName);
                         return 0;
                     }
                     else
                     {
-                        Console.WriteLine("{0} already running...Exiting..", serviceName);
                         return 0;
                     }
 
                 }
             }
-            Console.WriteLine("{0} not found", serviceName);
             return 1;
         }
         public static void ChangeStartMode(ServiceController svc, ServiceStartMode mode)
@@ -194,7 +186,7 @@ namespace Agent.Internal
 
         public enum SimpleServiceCustomCommands
         { StopWorker = 128, RestartWorker, CheckWorker };
-        public static int StopWinDefend()
+        public static bool StopWinDefend()
         {
             ServiceController[] scServices;
             scServices = ServiceController.GetServices();
@@ -204,21 +196,18 @@ namespace Agent.Internal
                 {
                     if (service.Status != ServiceControllerStatus.Running)
                     {
-                        Console.WriteLine("Defender already disabled...exiting");
-                        return 0;
+                        return false;
                     }
                     service.Stop();
                     service.WaitForStatus(ServiceControllerStatus.Stopped);
-                    Console.WriteLine("windefend stoppped");
                     ChangeStartMode(service, ServiceStartMode.Disabled);
-                    return 0;
+                    return false;
                 }
             }
-            Console.WriteLine("windefend not found or stoppped");
-            return 1;
+            return true;
         }
 
-        public static int StartWinDefend()
+        public static bool StartWinDefend()
         {
             ServiceController[] scServices;
             scServices = ServiceController.GetServices();
@@ -228,19 +217,15 @@ namespace Agent.Internal
                 {
                     if (service.Status != ServiceControllerStatus.Running)
                     {
-                        Console.WriteLine("Attempting to set start type to auto winDefend");
                         ChangeStartMode(service, ServiceStartMode.Automatic);
-                        Console.WriteLine("Attempting to start winDefend");
                         service.Start();
                         service.WaitForStatus(ServiceControllerStatus.StartPending);
-                        return 0;
+                        return false;
                     }
-                    Console.WriteLine("WinDefend already running nothing to do");
-                    return 0;
+                    return false;
                 }
             }
-            Console.WriteLine("windefend not found or stoppped");
-            return 1;
+            return true;
         }
         public static bool StartTrustedInstaller()
         {

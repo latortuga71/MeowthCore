@@ -47,6 +47,7 @@ namespace MeowthCoreServer.Models
         private void ConfigureApp(IApplicationBuilder app)
         {
             app.UseRouting();
+            //app.UseHttpsRedirection();
             app.UseEndpoints(e =>
             {
                 e.MapControllerRoute("/", "/", new { controller = "HttpListener", action = "HandleImplant" });

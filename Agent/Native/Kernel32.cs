@@ -99,6 +99,10 @@ namespace Agent.Native
            FileMapAccessType dwDesiredAccess, uint dwFileOffsetHigh, uint dwFileOffsetLow,
            UIntPtr dwNumberOfBytesToMap, IntPtr lpBaseAddress);
 
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr MapViewOfFile2(IntPtr hFileMappingObject,IntPtr ProcessHandle,int Offset,IntPtr pBaseAddress,uint AllocationType,uint PageProtection);
+
+
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetModuleHandle(string lpModuleName);
 
