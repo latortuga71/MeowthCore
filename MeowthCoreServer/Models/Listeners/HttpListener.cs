@@ -29,7 +29,7 @@ namespace MeowthCoreServer.Models
             var hostBuilder = new HostBuilder()
                 .ConfigureWebHostDefaults(host =>
                 {
-                    host.UseUrls($"http://0.0.0.0:{BindPort}");
+                    host.UseUrls($"https://0.0.0.0:{BindPort}");
                     host.Configure(ConfigureApp);
                     host.ConfigureServices(ConfigureServices);
                 });

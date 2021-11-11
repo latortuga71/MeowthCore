@@ -25,7 +25,7 @@ namespace Agent
             _ttsMins = 1;
             GenerateMetadata();
             LoadAgentCommands();
-            _commModule = new HttpCommModule("localhost", 8080);
+            _commModule = new HttpCommModule("localhost", 443);
             _commModule.Init(_metadata);
             while (true)
             {
