@@ -19,7 +19,6 @@ namespace Agent.Internal
             IntPtr ptrMapping = Native.Kernel32.MapViewOfFileEx(hFileMapping, Native.Kernel32.FileMapAccessType.Read, 0, 0, UIntPtr.Zero, IntPtr.Zero);
             if (ptrMapping == IntPtr.Zero)
             {
-                Console.WriteLine("Failed to map view of file");
                 return false;
             }
             string[] moduleNameSplit = pathToDll.Split('\\');
@@ -29,13 +28,11 @@ namespace Agent.Internal
                 if (n.EndsWith(".dll"))
                 {
                     moduleName = n;
-                    Console.WriteLine("Got module name : " + moduleName);
                     break;
                 }
             }
             if (moduleName == "")
             {
-                Console.WriteLine("Failed to split module name");
                 return false;
             }
             IntPtr addressOfHookedNtdll = Native.Kernel32.GetModuleHandle(pathToDll);
@@ -58,7 +55,6 @@ namespace Agent.Internal
             // call local unhook
             if (!UnHook(addressOfHookedNtdll, ptrMapping, pathToDll))
             {
-                Console.WriteLine("Failed!");
                 Native.Kernel32.UnmapViewOfFile(ptrMapping);
                 return false;
             }
@@ -98,7 +94,6 @@ namespace Agent.Internal
 
         private static bool UnHookRemote(IntPtr remoteProcessHandle, IntPtr hookedNtdllAddr, IntPtr cleanNtdllmapping, string pathToCleanDll)
         {
-            Console.WriteLine("Remote unhook");
             uint oldProtect = 0;
             PeHeaderReader reader = new PeHeaderReader(pathToCleanDll);
             PeHeaderReader.IMAGE_SECTION_HEADER textSection = reader.ImageSectionHeaders[0];

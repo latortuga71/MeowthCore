@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\latortuga\source\repos\MeowthCore\MeowthCoreServer\bin\Release\net5.0\publish\</_PublishTargetUrl>
-    <History>True|2021-11-05T01:39:14.6544752Z;True|2021-11-01T14:49:38.0038391-04:00;True|2021-11-01T14:49:00.1027536-04:00;True|2021-11-01T14:45:27.3724298-04:00;</History>
+    <History>True|2021-11-12T02:49:54.7829422Z;True|2021-11-04T21:39:14.6544752-04:00;True|2021-11-01T14:49:38.0038391-04:00;True|2021-11-01T14:49:00.1027536-04:00;True|2021-11-01T14:45:27.3724298-04:00;</History>
   </PropertyGroup>
 </Project>

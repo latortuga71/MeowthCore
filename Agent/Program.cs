@@ -37,7 +37,6 @@ namespace Agent
                         HandleTasks(tasks);
                     }
                 }
-                Console.WriteLine("sleeping...");
                 Thread.Sleep(_ttsMins * 60000);
             }
         }

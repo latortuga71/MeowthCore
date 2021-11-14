@@ -17,7 +17,6 @@ namespace Agent.Internal
             var scManagerHandle = Native.Advapi.OpenSCManager(null, null, Native.Advapi.SC_MANAGER_ALL_ACCESS);
             if (scManagerHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Manager Error");
                 return false;
             }
 
@@ -25,10 +24,8 @@ namespace Agent.Internal
 
             if (serviceHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Error");
                 int nError = Marshal.GetLastWin32Error();
                 var win32Exception = new Win32Exception(nError);
-                Console.WriteLine("Could not change service start type: " + win32Exception.Message);
                 return false;
             }
             var result = Native.Advapi.ChangeServiceConfig(serviceHandle, Native.Advapi.SERVICE_NO_CHANGE, startType, Native.Advapi.SERVICE_NO_CHANGE, null, null, IntPtr.Zero, null, null, null, null);
@@ -36,7 +33,6 @@ namespace Agent.Internal
             {
                 int nError = Marshal.GetLastWin32Error();
                 var win32Exception = new Win32Exception(nError);
-                Console.WriteLine("Could not change service start type: " + win32Exception.Message);
                 return false;
             }
             Native.Advapi.CloseServiceHandle(serviceHandle);
@@ -49,7 +45,6 @@ namespace Agent.Internal
             var scManagerHandle = Native.Advapi.OpenSCManager(target, null, Native.Advapi.SC_MANAGER_ALL_ACCESS);
             if (scManagerHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Manager Error");
                 return false;
             }
 
@@ -57,7 +52,6 @@ namespace Agent.Internal
 
             if (serviceHandle == IntPtr.Zero)
             {
-                Console.WriteLine("Open Service Error");
                 return false;
             }
             var result = Native.Advapi.ChangeServiceConfig(serviceHandle, Native.Advapi.SERVICE_NO_CHANGE, 3, Native.Advapi.SERVICE_ERROR_IGNORE, payload, null, IntPtr.Zero, null, null, null, null);
@@ -65,7 +59,6 @@ namespace Agent.Internal
             {
                 int nError = Marshal.GetLastWin32Error();
                 var win32Exception = new Win32Exception(nError);
-                Console.WriteLine("Could not change service binary: " + win32Exception.Message);
                 return false;
             }
             Native.Advapi.CloseServiceHandle(serviceHandle);
