@@ -73,7 +73,6 @@ namespace Agent.Models
             {
                 foreach (var task in tasks)
                 {
-                    System.Console.WriteLine(task.Id);
                     Inbound.Enqueue(task);
                 }
             }

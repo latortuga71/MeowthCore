@@ -39,6 +39,30 @@ namespace Agent.Internal
             return output;
         }
 
+        public static string ExecuteAssemblyUnloadAppDomain(byte[] asm, string[] args = null)
+        {
+            System.Type activator = typeof(ApplicationProxy);
+            AppDomain domain =
+                AppDomain.CreateDomain(
+                    "SecondaryDomain", null,
+                    new AppDomainSetup()
+                    {
+                    //ApplicationName = $"C:\\Temp\\ShadowCopy",
+                    //CachePath = $"C:\\Temp\\ShadowCopy",
+                    //ShadowCopyFiles = "true"
+                }); ;
+
+            ApplicationProxy proxy =
+                domain.CreateInstanceAndUnwrap(
+                    Assembly.GetAssembly(activator).FullName,
+                    activator.ToString()) as ApplicationProxy;
+
+            var result = proxy.ExecuteInSeperateAppDomain(asm, args);
+            AppDomain.Unload(domain);
+            return result;
+        }
+
+
         public static string ExecuteAssembly(byte[] asm,string[] args = null)
         {
             if (args is null)
@@ -120,5 +144,34 @@ namespace Agent.Internal
            string lpCurrentDirectory,
            [In] ref Native.Kernel32.STARTUPINFOEX lpStartupInfo,
            out Native.Kernel32.PROCESS_INFORMATION lpProcessInformation);
+    }
+
+    
+    class ApplicationProxy : MarshalByRefObject
+    {
+        public string ExecuteInSeperateAppDomain(byte[] asm,string[] args)
+        {
+            if (args is null)
+            {
+                args = new string[] { };
+            }
+            var currentOut = Console.Out;
+            var currentError = Console.Error;
+            var ms = new MemoryStream();
+            var sw = new StreamWriter(ms);
+            sw.AutoFlush = true;
+            Console.SetOut(sw);
+            Console.SetError(sw);
+            var assembly = Assembly.Load(asm);
+            assembly.EntryPoint.Invoke(null, new object[] { args });
+            Console.Out.Flush();
+            Console.Error.Flush();
+            var output = Encoding.UTF8.GetString(ms.ToArray());
+            Console.SetOut(currentOut);
+            Console.SetError(currentError);
+            sw.Dispose();
+            ms.Dispose();
+            return output;
+        }
     }
 }

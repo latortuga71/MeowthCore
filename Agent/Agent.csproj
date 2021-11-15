@@ -76,6 +76,7 @@
     <Compile Include="Commands\EnableDefenderForEndpoint.cs" />
     <Compile Include="Commands\EnablePrivilege.cs" />
     <Compile Include="Commands\EnumerateTokens.cs" />
+    <Compile Include="Commands\ExecuteAssemblyAndUnload.cs" />
     <Compile Include="Commands\FilelessLateralMovement.cs" />
     <Compile Include="Commands\GetSystem.cs" />
     <Compile Include="Commands\GetTrustedInstaller.cs" />
