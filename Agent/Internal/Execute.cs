@@ -8,11 +8,49 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
+//Adding libraries for powershell stuff
+using System.Collections.ObjectModel;
+using System.Management.Automation;
+using System.Management.Automation.Runspaces;
+
 
 namespace Agent.Internal
 {
     public static class Execute
     {
+        public static string ExecutePowershellScript(byte[] script)
+        {
+            string scriptString = System.Text.Encoding.UTF8.GetString(script);
+            Runspace runspace = RunspaceFactory.CreateRunspace();
+            PowerShell ps = PowerShell.Create();
+            ps.Runspace = runspace;
+            ps.AddScript(scriptString, true);
+            runspace.Open();
+            //settings.ErrorActionPreference = ActionPreference.Continue;
+            Collection<PSObject> results = ps.Invoke();
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (PSObject obj in results)
+            {
+                stringBuilder.Append(obj);
+            }
+            return stringBuilder.ToString().Trim();
+        }
+        public static string ExecutePowershellCommand(string args)
+        {
+            Runspace runspace = RunspaceFactory.CreateRunspace();
+            PowerShell ps = PowerShell.Create();
+            ps.Runspace = runspace;
+            ps.AddScript(args, true);
+            runspace.Open();
+            //settings.ErrorActionPreference = ActionPreference.Continue;
+            Collection<PSObject> results = ps.Invoke();
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (PSObject obj in results)
+            {
+                stringBuilder.Append(obj);
+            }
+            return stringBuilder.ToString().Trim();
+        }
         public static string ExecuteCommand(string fileName,string args)
         {
             var startInfo = new ProcessStartInfo

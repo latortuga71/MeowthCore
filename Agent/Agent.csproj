@@ -56,6 +56,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\WindowsPowerShell\3.0\System.Management.Automation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
@@ -92,6 +96,7 @@
     <Compile Include="Commands\PrintWorkingDirectory.cs" />
     <Compile Include="Commands\Run.cs" />
     <Compile Include="Commands\RunAs.cs" />
+    <Compile Include="Commands\RunPowershell.cs" />
     <Compile Include="Commands\Screenshot.cs" />
     <Compile Include="Commands\Shell.cs" />
     <Compile Include="Commands\ShellcodeInject.cs" />
