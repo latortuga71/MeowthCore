@@ -17,7 +17,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "No pid & fullPathToDll provided";
+                return "Error Provide Args <pid> <fullPathToDll>";
             }
             if (!int.TryParse(task.Args[0], out var pid))
                 return "Failed to parse PID";

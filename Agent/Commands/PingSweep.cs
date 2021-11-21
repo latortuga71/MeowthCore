@@ -24,7 +24,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "No Subnet Provided";
+                return "Error Provide Args <10.0.0.0/24>";
             }
             upHosts = new List<string>();
             var subnet = task.Args[0];

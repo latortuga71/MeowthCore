@@ -17,7 +17,7 @@ namespace Agent.Commands
             string path;
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "No Path Provided";
+                return "Error Provide Args <fullPathToDir>";
             }
             else
             {

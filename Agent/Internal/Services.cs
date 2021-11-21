@@ -307,5 +307,9 @@ namespace Agent.Internal
             Native.Advapi.CloseServiceHandle(scManagerHandle);
             return true;
         }
+        public static ServiceController[] GetServices()
+        {
+            return ServiceController.GetServices();
+        }
     }
 }

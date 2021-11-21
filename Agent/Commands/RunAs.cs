@@ -15,7 +15,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "No Username and password Provided";
+                return "Error Provide Args <DOMAIN\\USER> <password>";
             }
             var userDomain = task.Args[0];
             var password = task.Args[1];

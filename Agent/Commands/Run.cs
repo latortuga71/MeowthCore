@@ -15,7 +15,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "No Executable Path Provided";
+                return "Error Provide Args <fullPathToExe> <exeArgs>";
             }
             var fileName = task.Args[0];
             var args = string.Join(" ", task.Args.Skip(1));

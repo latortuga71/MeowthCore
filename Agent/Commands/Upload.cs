@@ -15,7 +15,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "No upload path provided";
+                return "Error Provide Args <fullPathToUpload>";
             }
             try
             {

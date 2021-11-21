@@ -15,7 +15,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "file path not provided";
+                return "Error Provide Args <fullPath>";
             }
             var filePath = task.Args[0];
             var fileInfo = new FileInfo(filePath);

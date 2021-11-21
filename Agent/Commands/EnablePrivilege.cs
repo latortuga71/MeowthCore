@@ -14,7 +14,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "No Privilege Provided";
+                return "Error Provide Args <SeDebugPrivilege>";
             }
             var priv = task.Args[0];
             if (Internal.Impersonator.IsPrivilegeEnabled(priv))

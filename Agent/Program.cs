@@ -49,6 +49,11 @@ namespace Agent
         }
         private static void HandleTask(AgentTask task)
         {
+            if (task.Command == "die")
+            {
+                System.Environment.Exit(0);
+                return;
+            }
             if (task.Command == "sleep")
             {
                 if (!HandleSleep(task))

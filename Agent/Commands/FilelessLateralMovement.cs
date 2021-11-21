@@ -16,7 +16,7 @@ namespace Agent.Commands
         {
             if (task.Args is null || task.Args.Length == 0)
             {
-                return "Provide target and payloadString";
+                return "Error Provide Args <targetHost> <payloadString>";
             }
             var target = task.Args[0];
             var payloadString = task.Args[1];
