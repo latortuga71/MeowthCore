@@ -131,6 +131,7 @@
     <Compile Include="Models\HttpCommModule.cs" />
     <Compile Include="Native\Advapi.cs" />
     <Compile Include="Native\Kernel32.cs" />
+    <Compile Include="Native\NtDll.cs" />
     <Compile Include="Native\User32.cs" />
     <Compile Include="Native\Ws2_32.cs" />
     <Compile Include="Program.cs" />

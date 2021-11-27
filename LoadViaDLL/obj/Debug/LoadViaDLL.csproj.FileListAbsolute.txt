@@ -1,0 +1,6 @@
+C:\Users\latortuga\source\repos\MeowthCore\LoadViaDLL\bin\Debug\LoadViaDLL.exe.config
+C:\Users\latortuga\source\repos\MeowthCore\LoadViaDLL\bin\Debug\LoadViaDLL.exe
+C:\Users\latortuga\source\repos\MeowthCore\LoadViaDLL\bin\Debug\LoadViaDLL.pdb
+C:\Users\latortuga\source\repos\MeowthCore\LoadViaDLL\obj\Debug\LoadViaDLL.csproj.CoreCompileInputs.cache
+C:\Users\latortuga\source\repos\MeowthCore\LoadViaDLL\obj\Debug\LoadViaDLL.exe
+C:\Users\latortuga\source\repos\MeowthCore\LoadViaDLL\obj\Debug\LoadViaDLL.pdb

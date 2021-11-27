@@ -70,9 +70,15 @@ namespace Agent.Commands
 
             foreach (ManagementObject managementObject in managementObjectCollection)
             {
-                return managementObject.GetPropertyValue("PathName").ToString();
+                try
+                {
+                    return managementObject.GetPropertyValue("PathName").ToString();
+                }
+                catch
+                {
+                    return "";
+                }
             }
-
             return "";
         }
     }

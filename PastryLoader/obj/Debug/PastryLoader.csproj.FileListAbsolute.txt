@@ -1,0 +1,7 @@
+C:\Users\latortuga\source\repos\MeowthCore\PastryLoader\bin\Debug\PastryLoader.exe.config
+C:\Users\latortuga\source\repos\MeowthCore\PastryLoader\bin\Debug\PastryLoader.exe
+C:\Users\latortuga\source\repos\MeowthCore\PastryLoader\bin\Debug\PastryLoader.pdb
+C:\Users\latortuga\source\repos\MeowthCore\PastryLoader\obj\Debug\PastryLoader.csproj.AssemblyReference.cache
+C:\Users\latortuga\source\repos\MeowthCore\PastryLoader\obj\Debug\PastryLoader.csproj.CoreCompileInputs.cache
+C:\Users\latortuga\source\repos\MeowthCore\PastryLoader\obj\Debug\PastryLoader.exe
+C:\Users\latortuga\source\repos\MeowthCore\PastryLoader\obj\Debug\PastryLoader.pdb

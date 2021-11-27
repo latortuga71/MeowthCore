@@ -13,7 +13,7 @@ namespace Agent.Commands
         public override string Execute(AgentTask task)
         {
             try
-            {
+            { 
                 var res = Internal.Execute.ExecuteCommand("netsh", "interface portproxy reset");
                 return $"Successfully reverted port forward";
             }
