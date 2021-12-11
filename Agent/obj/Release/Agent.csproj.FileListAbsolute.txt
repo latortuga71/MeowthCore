@@ -7,3 +7,5 @@ C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Agent.pdb
 C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Agent.csproj.AssemblyReference.cache
 C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Interop.NetFwTypeLib.dll
 C:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Agent.csproj.ResolveComReference.cache
+c:\Users\latortuga\source\repos\MeowthCore\Agent\bin\Release\System.Management.Automation.dll
+c:\Users\latortuga\source\repos\MeowthCore\Agent\obj\Release\Agent.csproj.CopyComplete
