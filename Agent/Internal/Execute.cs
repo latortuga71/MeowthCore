@@ -103,7 +103,6 @@ namespace Agent.Internal
 
         public static string ExecuteAssembly(byte[] asm,string[] args = null)
         {
-            System.Console.WriteLine(string.Join(",",args));
             if (args is null)
             {
                 args = new string[] { };
