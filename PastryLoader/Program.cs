@@ -141,12 +141,9 @@ namespace PastryLoader
             try
             {
                 byte[] dataBytes;
-                string b64dataString;
                 using (var client = new WebClient())
                 {
-                    //dataBytes = client.DownloadData(url);
-                    b64dataString = client.DownloadString(url);
-                    dataBytes = System.Convert.FromBase64String(b64dataString);
+                    dataBytes = client.DownloadData(url);
                 }
                 return dataBytes;
             }
