@@ -1,0 +1,7 @@
+C:\Users\latortuga\source\repos\MeowthCore\Loader\bin\Release\Loader.exe.config
+C:\Users\latortuga\source\repos\MeowthCore\Loader\bin\Release\Loader.exe
+C:\Users\latortuga\source\repos\MeowthCore\Loader\bin\Release\Loader.pdb
+C:\Users\latortuga\source\repos\MeowthCore\Loader\obj\Release\Loader.csproj.AssemblyReference.cache
+C:\Users\latortuga\source\repos\MeowthCore\Loader\obj\Release\Loader.csproj.CoreCompileInputs.cache
+C:\Users\latortuga\source\repos\MeowthCore\Loader\obj\Release\Loader.exe
+C:\Users\latortuga\source\repos\MeowthCore\Loader\obj\Release\Loader.pdb
